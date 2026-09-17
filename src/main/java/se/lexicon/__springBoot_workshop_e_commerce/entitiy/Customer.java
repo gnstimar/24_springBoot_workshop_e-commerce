@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -45,4 +47,11 @@ public class Customer {
     public void PrePersist() {
         this.createdAt = Instant.now();
     }
+
+    /*
+    * Optional bidirectional relationship between Customer and Order
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private List<Order> orders = new ArrayList<>();
+     */
 }
