@@ -4,13 +4,15 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode
+@ToString(exclude = {"products"})
+@EqualsAndHashCode(exclude = {"products"})
 
 @Entity
 @Table(name = "PROMOTIONS")
@@ -29,4 +31,8 @@ public class Promotion {
     @Column(nullable = false)
     private LocalDate endDate;
 
+    /*If we want bidirectional relationship
+    @ManyToMany(mappedBy = "promotions", fetch = FetchType.LAZY)
+    private Set<Product> products = new HashSet<>();
+     */
 }

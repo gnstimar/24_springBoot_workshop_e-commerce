@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -11,9 +12,8 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-// TODO complete exclude
-@ToString(exclude = {"category"})
-@EqualsAndHashCode(exclude = {"category"})
+@ToString(exclude = {"category", "promotions"})
+@EqualsAndHashCode(exclude = {"category", "promotions"})
 
 @Entity
 @Table(name = "PRODUCTS")
@@ -35,6 +35,11 @@ public class Product {
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
-    // TODO complete relationship
-    private Set<Promotion> promotions;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "products_promotions",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "promotion_id")
+    )
+    private Set<Promotion> promotions = new HashSet<>();
 }
