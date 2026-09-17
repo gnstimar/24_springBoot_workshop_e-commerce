@@ -25,6 +25,7 @@ public class Order {
     @Column(name = "order_date", nullable = false, updatable = false)
     private Instant orderDate;
 
+    // OrderStatus Enum is added
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private OrderStatus orderStatus;
