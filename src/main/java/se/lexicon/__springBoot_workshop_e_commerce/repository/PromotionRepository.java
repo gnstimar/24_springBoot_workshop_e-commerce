@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface PromotionRepository extends JpaRepository {
+public interface PromotionRepository extends JpaRepository<Promotion, Long> {
 
     @Query("SELECT p FROM Promotion p WHERE :date BETWEEN p.startDate AND p.endDate")
     List<Promotion> findActivePromotionsOnDate(@Param("date") LocalDate date);
