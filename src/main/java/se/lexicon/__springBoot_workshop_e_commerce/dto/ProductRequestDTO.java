@@ -1,6 +1,7 @@
 package se.lexicon.__springBoot_workshop_e_commerce.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
@@ -11,11 +12,11 @@ public record ProductRequestDTO(
         @Size(max = 100, message = "Name cannot be longer than 100 characters.")
         String name,
 
-        @NotBlank(message = "Price is required.")
-        @Positive
+        @NotNull(message = "Price is required.")
+        @Positive(message = "Price must be positive.")
         BigDecimal price,
 
-        @NotBlank(message = "Category ID is required.")
+        @NotNull(message = "Category ID is required.")
         Long categoryId
 ) {
 }
