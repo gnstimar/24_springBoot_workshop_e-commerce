@@ -22,12 +22,12 @@ public record CustomerRequestDTO(
         )
         String email,
 
-        @NotBlank(message = "Password is required.")
+/*        @NotBlank(message = "Password is required.")
         @Pattern(
                 regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\\d).{8,20}$",
                 message = "Password needs at least one small letter, at least one capital letter, at least one digit and the minimum length of 8 characters and the maximum length of 20 characters."
         )
-        String password,
+        String password,*/
 
         @NotBlank(message = "Street is required.")
         String street,
