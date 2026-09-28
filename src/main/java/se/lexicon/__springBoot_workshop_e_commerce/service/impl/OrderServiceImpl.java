@@ -9,6 +9,7 @@ import se.lexicon.__springBoot_workshop_e_commerce.entitiy.Customer;
 import se.lexicon.__springBoot_workshop_e_commerce.entitiy.Order;
 import se.lexicon.__springBoot_workshop_e_commerce.entitiy.OrderItem;
 import se.lexicon.__springBoot_workshop_e_commerce.entitiy.Product;
+import se.lexicon.__springBoot_workshop_e_commerce.exception.CustomerNotFoundException;
 import se.lexicon.__springBoot_workshop_e_commerce.exception.ResourceNotFoundException;
 import se.lexicon.__springBoot_workshop_e_commerce.mapper.OrderMapper;
 import se.lexicon.__springBoot_workshop_e_commerce.repository.CustomerRepository;
@@ -41,7 +42,7 @@ public class OrderServiceImpl implements OrderService {
             throw new IllegalArgumentException("Order Request is required.");
         }
 
-        Customer customer = customerRepository.findById(orderRequestDTO.customerId()).orElseThrow(() -> new ResourceNotFoundException("Customer is not found with ID: " + orderRequestDTO.customerId()));
+        Customer customer = customerRepository.findById(orderRequestDTO.customerId()).orElseThrow(() -> new CustomerNotFoundException());
 
         List<OrderItem> items = new ArrayList<>();
 

@@ -7,7 +7,7 @@ import se.lexicon.__springBoot_workshop_e_commerce.dto.CustomerRequestDTO;
 import se.lexicon.__springBoot_workshop_e_commerce.dto.CustomerResponseDTO;
 import se.lexicon.__springBoot_workshop_e_commerce.entitiy.Address;
 import se.lexicon.__springBoot_workshop_e_commerce.entitiy.Customer;
-import se.lexicon.__springBoot_workshop_e_commerce.exception.ResourceNotFoundException;
+import se.lexicon.__springBoot_workshop_e_commerce.exception.CustomerNotFoundException;
 import se.lexicon.__springBoot_workshop_e_commerce.mapper.CustomerMapper;
 import se.lexicon.__springBoot_workshop_e_commerce.repository.CustomerRepository;
 import se.lexicon.__springBoot_workshop_e_commerce.service.CustomerService;
@@ -42,7 +42,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     @Transactional(readOnly = true)
-    public CustomerResponseDTO findById(Long id) throws ResourceNotFoundException {
+    public CustomerResponseDTO findById(Long id) throws CustomerNotFoundException {
         if (id == null) {
             throw new IllegalArgumentException("ID cannot be empty.");
         }
@@ -50,7 +50,7 @@ public class CustomerServiceImpl implements CustomerService {
         //return customerRepository.findById(id).map(customerMapper::toResponse);
         return customerRepository.findById(id)
                 .map(customer -> customerMapper.toResponse(customer))
-                .orElseThrow(()->new ResourceNotFoundException("Customer not found with ID: " + id));
+                .orElseThrow(()->new CustomerNotFoundException("Customer not found with ID: " + id));
     }
 
     @Override
@@ -63,7 +63,7 @@ public class CustomerServiceImpl implements CustomerService {
             throw new IllegalArgumentException("Customer Request cannot be null for update.");
         }
 
-        Customer customer = customerRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Customer is not found with ID: "+ id));
+        Customer customer = customerRepository.findById(id).orElseThrow(()->new CustomerNotFoundException("Customer is not found with ID: "+ id));
 
         customer.setFirstName(customerRequestDTO.firstName());
         customer.setLastName(customerRequestDTO.lastName());
