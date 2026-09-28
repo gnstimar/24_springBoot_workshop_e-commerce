@@ -1,9 +1,7 @@
 package se.lexicon.__springBoot_workshop_e_commerce.mapper;
 
 import org.springframework.stereotype.Component;
-import se.lexicon.__springBoot_workshop_e_commerce.dto.OrderItemRequestDTO;
 import se.lexicon.__springBoot_workshop_e_commerce.dto.OrderItemResponseDTO;
-import se.lexicon.__springBoot_workshop_e_commerce.dto.OrderRequestDTO;
 import se.lexicon.__springBoot_workshop_e_commerce.dto.OrderResponseDTO;
 import se.lexicon.__springBoot_workshop_e_commerce.entitiy.Customer;
 import se.lexicon.__springBoot_workshop_e_commerce.entitiy.Order;
@@ -11,7 +9,6 @@ import se.lexicon.__springBoot_workshop_e_commerce.entitiy.OrderItem;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class OrderMapper {
@@ -41,10 +38,7 @@ public class OrderMapper {
         );
     }
 
-    public Order toEntity(OrderRequestDTO orderRequestDTO, Customer customer, List<OrderItem> items) {
-        if (orderRequestDTO == null) {
-            return null;
-        }
+    public Order toEntity(Customer customer, List<OrderItem> items) {
         Order order = new Order();
         order.setCustomer(customer);
 
