@@ -1,8 +1,8 @@
 package se.lexicon.__springBoot_workshop_e_commerce.service.impl;
 
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import se.lexicon.__springBoot_workshop_e_commerce.dto.CustomerRequestDTO;
 import se.lexicon.__springBoot_workshop_e_commerce.dto.CustomerResponseDTO;
 import se.lexicon.__springBoot_workshop_e_commerce.entitiy.Address;
@@ -11,8 +11,6 @@ import se.lexicon.__springBoot_workshop_e_commerce.exception.ResourceNotFoundExc
 import se.lexicon.__springBoot_workshop_e_commerce.mapper.CustomerMapper;
 import se.lexicon.__springBoot_workshop_e_commerce.repository.CustomerRepository;
 import se.lexicon.__springBoot_workshop_e_commerce.service.CustomerService;
-
-import java.util.Optional;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {

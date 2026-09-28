@@ -1,10 +1,8 @@
 package se.lexicon.__springBoot_workshop_e_commerce.dto;
 
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import se.lexicon.__springBoot_workshop_e_commerce.entitiy.OrderItem;
 
 import java.util.List;
 
