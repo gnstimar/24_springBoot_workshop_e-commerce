@@ -1,5 +1,10 @@
 package se.lexicon.__springBoot_workshop_e_commerce.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +19,8 @@ import se.lexicon.__springBoot_workshop_e_commerce.service.CustomerService;
 @RestController
 @RequestMapping("/api/v1/customers")
 @Validated
+
+@Tag(name = "Customer Controller", description = "APIs for managing customers")
 public class CustomerController {
 
     private final CustomerService customerService;
@@ -24,6 +31,11 @@ public class CustomerController {
     }
 
     @PostMapping
+    @Operation(summary = "Register a new customer.", description = "Register a new customer if the email is not already taken.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Customer created successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid request body provided")
+    })
     public ResponseEntity<CustomerResponseDTO> register(@RequestBody @Valid CustomerRequestDTO customerRequestDTO) {
         CustomerResponseDTO customerResponseDTO = customerService.register(customerRequestDTO);
 
@@ -31,6 +43,8 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Find a customer by ID.")
+    @Parameter(description = "ID of the customer to be retrieved", example = "1")
     public ResponseEntity<CustomerResponseDTO> findById(@PathVariable @Positive Long id) {
         CustomerResponseDTO customerResponseDTO = customerService.findById(id);
 
@@ -38,6 +52,8 @@ public class CustomerController {
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Update a customer by ID.", description = "It is possible to change the name for example.")
+    @Parameter(description = "ID of the customer to be updated", example = "1")
     public ResponseEntity<CustomerResponseDTO> update(@PathVariable @Positive Long id, @RequestBody @Valid CustomerRequestDTO customerRequestDTO) {
         CustomerResponseDTO customerResponseDTO = customerService.update(id, customerRequestDTO);
 

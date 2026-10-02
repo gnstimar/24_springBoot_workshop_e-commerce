@@ -1,5 +1,8 @@
 package se.lexicon.__springBoot_workshop_e_commerce.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,8 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/products")
 @Validated
+
+@Tag(name = "Product Controller", description = "APIs for managing products")
 public class ProductController {
 
     private final ProductService productService;
@@ -26,6 +31,7 @@ public class ProductController {
     }
 
     @PostMapping
+    @Operation(summary = "Create a new product.")
     public ResponseEntity<ProductResponseDTO> create(@RequestBody @Valid ProductRequestDTO productRequestDTO) {
         ProductResponseDTO productResponseDTO = productService.create(productRequestDTO);
 
@@ -33,11 +39,14 @@ public class ProductController {
     }
 
     @GetMapping
+    @Operation(summary = "List all products.")
     public ResponseEntity<List<ProductResponseDTO>> findAll() {
         return ResponseEntity.ok(productService.findAll());
     }
 
     @GetMapping("/search")
+    @Operation(summary = "Find a user by name.", description = "This will give back all products that contains this word.")
+    @Parameter(description = "Piece of name of the product to be found", example = "recipe")
     public ResponseEntity<List<ProductResponseDTO>> findByName(@RequestParam @NotBlank String name) {
         List<ProductResponseDTO> productResponseDTOs = productService.searchByName(name);
 

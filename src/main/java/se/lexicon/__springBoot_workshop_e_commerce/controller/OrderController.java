@@ -1,5 +1,7 @@
 package se.lexicon.__springBoot_workshop_e_commerce.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +17,8 @@ import se.lexicon.__springBoot_workshop_e_commerce.service.OrderService;
 @RestController
 @RequestMapping("/api/v1/orders")
 @Valid
+
+@Tag(name = "Order Controller", description = "APIs for managing orders")
 public class OrderController {
 
     private final OrderService orderService;
@@ -25,6 +29,7 @@ public class OrderController {
     }
 
     @PostMapping
+    @Operation(summary = "Place a new order.", description = "Create a new order with a customer ID and with a list of items.")
     public ResponseEntity<OrderResponseDTO> placeOrder(@RequestBody @Valid OrderRequestDTO orderRequestDTO) {
         OrderResponseDTO orderResponseDTO = orderService.placeOrder(orderRequestDTO);
 
