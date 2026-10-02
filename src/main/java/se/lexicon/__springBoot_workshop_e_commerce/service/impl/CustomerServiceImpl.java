@@ -8,6 +8,7 @@ import se.lexicon.__springBoot_workshop_e_commerce.dto.CustomerResponseDTO;
 import se.lexicon.__springBoot_workshop_e_commerce.entitiy.Address;
 import se.lexicon.__springBoot_workshop_e_commerce.entitiy.Customer;
 import se.lexicon.__springBoot_workshop_e_commerce.exception.CustomerNotFoundException;
+import se.lexicon.__springBoot_workshop_e_commerce.exception.DuplicateEntryException;
 import se.lexicon.__springBoot_workshop_e_commerce.mapper.CustomerMapper;
 import se.lexicon.__springBoot_workshop_e_commerce.repository.CustomerRepository;
 import se.lexicon.__springBoot_workshop_e_commerce.service.CustomerService;
@@ -31,7 +32,7 @@ public class CustomerServiceImpl implements CustomerService {
         }
 
         if (customerRepository.findByEmail(customerRequestDTO.email()).isPresent()) {
-            throw new IllegalArgumentException("Email is already registered.");
+            throw new DuplicateEntryException("Email is already registered.");
         }
 
         Customer customer = customerMapper.toEntity(customerRequestDTO);
