@@ -5,10 +5,7 @@ import org.springframework.stereotype.Service;
 import se.lexicon.__springBoot_workshop_e_commerce.dto.OrderItemRequestDTO;
 import se.lexicon.__springBoot_workshop_e_commerce.dto.OrderRequestDTO;
 import se.lexicon.__springBoot_workshop_e_commerce.dto.OrderResponseDTO;
-import se.lexicon.__springBoot_workshop_e_commerce.entitiy.Customer;
-import se.lexicon.__springBoot_workshop_e_commerce.entitiy.Order;
-import se.lexicon.__springBoot_workshop_e_commerce.entitiy.OrderItem;
-import se.lexicon.__springBoot_workshop_e_commerce.entitiy.Product;
+import se.lexicon.__springBoot_workshop_e_commerce.entitiy.*;
 import se.lexicon.__springBoot_workshop_e_commerce.exception.CustomerNotFoundException;
 import se.lexicon.__springBoot_workshop_e_commerce.exception.ResourceNotFoundException;
 import se.lexicon.__springBoot_workshop_e_commerce.mapper.OrderMapper;
@@ -58,6 +55,7 @@ public class OrderServiceImpl implements OrderService {
         // TODO: activate Promotions - will implement later
 
         Order order = orderMapper.toEntity(customer, items);
+        order.setOrderStatus(OrderStatus.CREATED);
 
         Order savedOrder = orderRepository.save(order);
 
